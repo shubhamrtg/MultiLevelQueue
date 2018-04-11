@@ -1,0 +1,33 @@
+void roundRobinAlgorithm(struct processStruct p[],int queueNo)
+{		printf("Round Robin is Running at %d sec\n",currTime);
+		int timeQuantum=10;
+		int i;
+		for( i=0;i<queueNo;i++)
+		{	
+			if(timeQuantum<=queueTimer&&p[i].arrival<=currTime)
+			{
+			if(p[i].start==-1)
+			{
+			p[i].start=currTime;
+			}
+			if(p[i].brustTime>=timeQuantum)
+			{
+			p[i].brustTime=p[i].brustTime-timeQuantum;
+			currTime=currTime+timeQuantum;
+			queueTimer-=timeQuantum;
+			}
+			if(p[i].brustTime<timeQuantum&&p[i].brustTime>0) 
+			{
+			currTime=currTime+p[i].brustTime;
+			queueTimer-=p[i].brustTime;
+			p[i].brustTime=0;
+			}
+			if(p[i].brustTime==0&&p[i].compTime==-1)
+			{
+				p[i].compTime=currTime;
+				total--;
+			}
+			}
+		}
+		queueTimer=10;
+}
