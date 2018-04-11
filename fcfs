@@ -1,0 +1,38 @@
+void firstComeFirstServe(struct processStruct p[],int r)
+{
+	printf("First Come First Serve is Running at %d sec\n",currTime);
+	int i;
+		for(i=0;i<r;i++)
+		{	
+			if(p[i].brustTime<=queueTimer && p[i].arrival<=currTime && p[i].brustTime>0)
+			{			
+			if(p[i].start==-1)
+			p[i].start=currTime;
+			p[i].brustTime=0;
+			currTime=currTime+p[i].brustTime;
+			queueTimer-=p[i].brustTime;
+			if(p[i].brustTime==0&&p[i].compTime==-1)
+			{
+				p[i].compTime=currTime;
+				total--;
+			}
+		    }
+			else
+			{
+				if((p[i].brustTime-queueTimer>0)&&p[i].arrival<=currTime&&p[i].brustTime>0)
+				{
+				if(p[i].start==-1)
+				p[i].start=currTime;
+				p[i].brustTime=p[i].brustTime-queueTimer;
+				currTime=currTime+queueTimer;
+				queueTimer=0;
+				if(p[i].brustTime==0&&p[i].compTime==-1)
+				{
+					p[i].compTime=currTime;
+					total--;
+				}
+				}
+			}
+		}
+		queueTimer=10;
+}
