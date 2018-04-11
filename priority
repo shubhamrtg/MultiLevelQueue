@@ -1,0 +1,31 @@
+int priorityAlgo(struct processStruct p[],int r,int remain)
+{
+	printf("Priority Queue is Running at %d sec \n",currTime);
+	int smallest;
+	int i;
+	while(remain!=0&&queueTimer>0)
+	{
+	    smallest=r;
+	    for(i=0;i<r;i++)
+	    {	
+	        if(p[i].arrival<=currTime && p[i].priority<p[smallest].priority && p[i].brustTime>0)
+	        {	
+	            smallest=i;
+	        }
+	    }
+	    if(p[smallest].start==-1)
+	    {
+	        p[smallest].start=currTime;
+	    }
+	    queueTimer-=1;
+	    p[smallest].brustTime-=1;
+	    if(p[smallest].brustTime==0&&p[smallest].compTime==-1)
+	    {
+	    	p[smallest].compTime=currTime;
+	        total--;
+	        remain--;
+	    }
+	    currTime+=1;
+	}
+	queueTimer=10;
+}
